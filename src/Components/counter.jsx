@@ -1,45 +1,32 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
-  state = {
-    count: 0,
-  };
-
   render() {
     return (
-      <React.Fragment>
-        Item : <span> {this.formatCount()} </span>
+      <div>
+        Item #{this.props.counter.id}: <span> {this.props.counter.value} </span>
         <button
-          onClick={this.handleIncrement}
+          onClick={() => this.props.onIncrement(this.props.counter)}
           className="btn btn-primary btn-sm m-2"
+          disabled={this.props.counter.value >= 9}
         >
           +
         </button>
         <button
-          onClick={this.handleDecrement}
+          onClick={() => this.props.onDecrement(this.props.counter)}
           className="btn btn-primary btn-sm m-2"
-          disabled={this.state.count === 0}
+          disabled={this.props.counter.value === 0}
         >
           -
         </button>
-      </React.Fragment>
+        <button
+          className="btn btn-danger btn-sm m-2"
+          onClick={() => this.props.onDelete(this.props.counter)}
+        >
+          Delete
+        </button>
+      </div>
     );
-  }
-
-  // constructor() {
-  //   super();
-  //   this.handleIncrement = this.handleIncrement.bind(this.state.count);
-  // }
-
-  handleIncrement = () => {
-    this.setState({ count: ++this.state.count });
-  };
-  handleDecrement = () => {
-    this.setState({ count: --this.state.count });
-  };
-  formatCount() {
-    const { count } = this.state;
-    return count === 0 ? "0" : count;
   }
 }
 
