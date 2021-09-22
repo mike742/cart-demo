@@ -25,6 +25,13 @@ class Counter extends Component {
         >
           Delete
         </button>
+        <button
+          onClick={() => this.props.onReset(this.props.counter)}
+          className="btn btn-warning btn-sm mx-2 border border-primary"
+          disabled={this.props.counter.value === 0}
+        >
+          Reset
+        </button>
       </div>
     );
   }
