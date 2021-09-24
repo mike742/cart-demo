@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Counters from "./counters";
 
-class Navbar extends Counters {
+class Navbar extends Component {
   render() {
     // const totalNumber =
     //   //.filter((c) => c.value > 0)

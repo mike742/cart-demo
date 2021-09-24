@@ -4,9 +4,9 @@ import Counters from "./Components/counters";
 import Navbar from "./Components/navbar";
 import React, { Component } from "react";
 import Doctors from "./Components/doctors";
-import axios from "axios";
+import Patient from "./Components/patient";
 
-class App extends React.Component {
+class App extends Component {
   state = {
     counters: [
       { id: 1, value: 1, price: 15.25 },
@@ -14,19 +14,12 @@ class App extends React.Component {
       { id: 3, value: 0, price: 10.45 },
       { id: 4, value: 2, price: 5.98 },
     ],
-    doctors: [],
+    // doctors: [],
     currentDoctor: { id: 0, name: "" },
   };
 
-  componentDidMount() {
-    axios.get("http://localhost:3001/doctors").then((res, err) => {
-      //console.log(res.data);
-      this.setState({ doctors: res.data });
-    });
-  }
-
-  handleCurrentDoctor = (smth) => {
-    console.log(smth);
+  handleCurrentDoctor = (currentDoctor) => {
+    this.setState({ currentDoctor });
   };
 
   handleResetAll = () => {
@@ -77,11 +70,9 @@ class App extends React.Component {
           totalNumber={this.state.counters.filter((c) => c.value != 0).length}
         />
         <div className="container">
-          Current doctor: <p>{this.state.currentDoctor.name}</p>
-          <Doctors
-            doctors={this.state.doctors}
-            onCurrentDoctor={this.handleCurrentDoctor}
-          />
+          Current doctor: <span>{this.state.currentDoctor.name}</span>
+          <Doctors onCurrentDoctor={this.handleCurrentDoctor} />
+          <Patient />
           {/* <Counters
           counters={this.state.counters}
           onDelete={this.handleDelete}
